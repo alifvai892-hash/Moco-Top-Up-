@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Moco Store - টপ আপ এবং গেম</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7861FF;
+            --bg: #F7F7FF;
+            --card-bg: #FFFFFF;
+            --text-dark: #2D3748;
+            --text-muted: #718096;
+            --border: #E2E8F0;
+            --nav-bg: #FFFFFF;
+        }
+
+        [data-theme="dark"] {
+            --primary: #474757;
+            --bg: #111418;
+            --card-bg: #1A202C;
+            --text-dark: #F7FAFp;
+            --text-muted: #A0AEC0;
+            --border: #2D3748;
+            --nav-bg: #161922;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            padding-bottom: 80px;
+        }
+
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--nav-bg);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 950;
+            cursor: pointer;
+        }
+
+        .brand-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-dark);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .wallet-pill {
+            background: #E9E7FF;
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .main-container {
+            padding: 16px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            display: block;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .item-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .item-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .item-card.selected {
+            border-color: var(--primary);
+            background: rgba(120, 97, 255, 0.05);
+        }
+
+        #gameCanvas {
+            background: #172a21;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            touch-action: none;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--nav-bg);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-navbar">
+        <div class="brand-logo" onclick="switchView('home')">
+            <img id="navLogo" src="https://via.placeholder.com/32" alt="Logo">
+            <span id="navBrandName">Moco Store</span>
+        </div>
+        <div class="top-actions">
+            <div class="wallet-pill" id="userWallet">৳ 0</div>
+            <button class="theme-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- হোম পেজ -->
+        <div id="viewHome" class="view active">
+            <div class="card">
+                <h3>ফ্রি ফায়ার ডায়মন্ড ও টপ-আপ</h3>
+                <p style="color:var(--text-muted); font-size:13px; margin-top:5px;">নিরাপদে ও দ্রুত টপ-আপ করুন।</p>
+                <div class="item-selection-grid" id="topupItemsContainer"></div>
+                <div style="margin-top:15px;">
+                    <input type="text" id="gamePlayerId" placeholder="আপনার গেম ইউআইডি (UID) লিখুন" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--bg); color:var(--text-dark); margin-bottom:10px;">
+                    <button class="btn" onclick="processTopUp()">পেমেন্ট করুন ও অর্ডার দিন</button>
+                </div>
+            </div>
+
+            <div class="card" style="text-align: center;">
+                <h3>মিনি গেম (ওয়ার্মস স্নেক)</h3>
+                <p style="color:var(--text-muted); font-size:13px; margin:5px 0 15px 0;">স্মুথ কন্ট্রোল দিয়ে খেলুন এবং পয়েন্ট অর্জন করুন!</p>
+                <button class="btn" onclick="switchView('game')">গেম খেলুন</button>
+            </div>
+        </div>
+
+        <!-- গেম পেজ -->
+        <div id="viewGame" class="view">
+            <div class="card" style="text-align:center;">
+                <h3 style="margin-bottom:10px;">স্নেক জোন গেম</h3>
+                <p style="font-size:14px; margin-bottom:10px;">স্কোর: <span id="gameScore">0</span></p>
+                <canvas id="gameCanvas" width="320" height="400"></canvas>
+                <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">স্ক্রিনে আঙুল টেনে বা মাউস দিয়ে সাপ নিয়ন্ত্রণ করুন।</p>
+            </div>
+        </div>
+
+        <!-- অ্যাকাউন্ট পেজ -->
+        <div id="viewAccount" class="view">
+            <div class="card" style="text-align: center;">
+                <div id="authSection">
+                    <h3>লগইন বা সাইন আপ করুন</h3>
+                    <p style="color:var(--text-muted); font-size:13px; margin:10px 0;">গুগল অ্যাকাউন্ট দিয়ে এক ক্লিকে প্রবেশ করুন।</p>
+                    <button class="btn" onclick="googleLogin()"><i class="fa-brands fa-google"></i> গুগল দিয়ে লগইন/সাইন আপ</button>
+                </div>
+                <div id="userProfileSection" style="display:none;">
+                    <img id="userAvatar" src="" style="width:60px; height:60px; border-radius:50%; margin-bottom:10px;">
+                    <h3 id="userName">User Name</h3>
+                    <p id="userEmail" style="color:var(--text-muted); font-size:13px; margin-bottom:15px;"></p>
+                    <button class="btn btn-outline" onclick="logout()">লগআউট</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- এডমিন প্যানেল -->
+        <div id="viewAdmin" class="view">
+            <div class="card">
+                <h3>অ্যাডমিন প্যানেল</h3>
+                <p style="color:var(--text-muted); font-size:13px; margin-top:5px;">ওয়েবসাইটের তথ্য ও পেমেন্ট নম্বর সেটআপ করুন</p>
+                <div style="margin-top:15px;">
+                    <label style="font-size:13px; font-weight:600;">ওয়েবসাইটের নাম</label>
+                    <input type="text" id="adminSiteName" style="width:100%; padding:8px; border:1px solid var(--border); border-radius:6px; margin:5px 0 10px 0; background:var(--bg); color:var(--text-dark);">
+                    
+                    <label style="font-size:13px; font-weight:600;">বিকাশ/নগদ পেমেন্ট নম্বর</label>
+                    <input type="text" id="adminPaymentNo" placeholder="017xxxxxxxx" style="width:100%; padding:8px; border:1px solid var(--border); border-radius:6px; margin:5px 0 10px 0; background:var(--bg); color:var(--text-dark);">
+                    
+                    <button class="btn" onclick="saveAdminSettings()">সেটিংস সংরক্ষণ করুন</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchView('home')"><i class="fa-solid fa-house"></i>হোম</div>
+        <div class="nav-item" onclick="switchView('game')"><i class="fa-solid fa-gamepad"></i>গেম</div>
+        <div class="nav-item" onclick="switchView('account')"><i class="fa-solid fa-user"></i>অ্যাকাউন্ট</div>
+        <div class="nav-item" onclick="switchView('admin')"><i class="fa-solid fa-lock"></i>এডমিন</div>
+    </nav>
+
+    <script>
+        // লোকাল স্টোরেজ ডাটা ম্যানেজমেন্ট
+        let appData = JSON.parse(localStorage.getItem('moco_data')) || {
+            siteName: "Moco Store",
+            paymentNo: "01712345678",
+            user: null,
+            wallet: 50
+        };
+
+        function saveData() {
+            localStorage.setItem('moco_data', JSON.stringify(appData));
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('navBrandName').innerText = appData.siteName;
+            document.getElementById('userWallet').innerText = `৳ ${appData.wallet}`;
+            if(appData.user) {
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('userProfileSection').style.display = 'block';
+                document.getElementById('userName').innerText = appData.user.name;
+                document.getElementById('userEmail').innerText = appData.user.email;
+                document.getElementById('userAvatar').src = appData.user.avatar || 'https://via.placeholder.com/60';
+            } else {
+                document.getElementById('authSection').style.display = 'block';
+                document.getElementById('userProfileSection').style.display = 'none';
+            }
+            document.getElementById('adminSiteName').value = appData.siteName;
+            document.getElementById('adminPaymentNo').value = appData.paymentNo;
+        }
+
+        function switchView(viewName) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            if(viewName === 'home') {
+                document.getElementById('viewHome').classList.add('active');
+                document.querySelectorAll('.nav-item')[0].classList.add('active');
+            } else if(viewName === 'game') {
+                document.getElementById('viewGame').classList.add('active');
+                document.querySelectorAll('.nav-item')[1].classList.add('active');
+                initGame();
+            } else if(viewName === 'account') {
+                document.getElementById('viewAccount').classList.add('active');
+                document.querySelectorAll('.nav-item')[2].classList.add('active');
+            } else if(viewName === 'admin') {
+                document.getElementById('viewAdmin').classList.add('active');
+                document.querySelectorAll('.nav-item')[3].classList.add('active');
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if(html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        // গুগল লগইন সিমুলেশন
+        function googleLogin() {
+            appData.user = {
+                name: "আলি ভাই",
+                email: "alifvai892@gmail.com",
+                avatar: "https://via.placeholder.com/60"
+            };
+            saveData();
+            alert("সফলভাবে গুগল লগইন সম্পন্ন হয়েছে!");
+        }
+
+        function logout() {
+            appData.user = null;
+            saveData();
+        }
+
+        // এডমিন সেটিংস সেভ
+        function saveAdminSettings() {
+            appData.siteName = document.getElementById('adminSiteName').value;
+            appData.paymentNo = document.getElementById('adminPaymentNo').value;
+            saveData();
+            alert("এডমিন সেটিংস সফলভাবে আপডেট করা হয়েছে!");
+        }
+
+        // টপ আপ আইটেম রেন্ডার
+        const topupItems = [
+            {name: "25 Diamonds", price: "৳ ২৫"},
+            {name: "50 Diamonds", price: "৳ ৫০"},
+            {name: "100 Diamonds", price: "৳ ১০০"}
+        ];
+        let selectedItem = null;
+
+        function renderTopupItems() {
+            const container = document.getElementById('topupItemsContainer');
+            container.innerHTML = '';
+            topupItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `item-card ${selectedItem === index ? 'selected' : ''}`;
+                div.innerHTML = `<strong>${item.name}</strong><br><span style="font-size:12px; color:var(--primary);">${item.price}</span>`;
+                div.onclick = () => { selectedItem = index; renderTopupItems(); };
+                container.appendChild(div);
+            });
+        }
+
+        function processTopUp() {
+            const uid = document.getElementById('gamePlayerId').value;
+            if(!uid) { alert("দয়া করে আপনার গেম ইউআইডি (UID) লিখুন।"); return; }
+            if(selectedItem === null) { alert("দয়া করে একটি ডায়মন্ড প্যাকেজ সিলেক্ট করুন।"); return; }
+            alert(`আপনার অর্ডারটি গ্রহণ করা হয়েছে! পেমেন্ট পাঠানোর জন্য এডমিন নম্বর (${appData.paymentNo}) তে টাকা পাঠান।`);
+        }
+
+        // স্মুথ স্নেক গেম লজিক (ঘনঘন গেম ওভার ফিক্সড)
+        let gameInterval = null;
+        function initGame() {
+            if(gameInterval) clearInterval(gameInterval);
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let snake = [{x: 160, y: 200}, {x: 150, y: 200}, {x: 140, y: 200}];
+            let dx = 10;
+            let dy = 0;
+            let foodX, foodY;
+            let score = 0;
+
+            function createFood() {
+                foodX = Math.floor(Math.random() * (canvas.width / 10)) * 10;
+                foodY = Math.floor(Math.random() * (canvas.height / 10)) * 10;
+            }
+            createFood();
+
+            function main() {
+                if(hasGameEnded()) {
+                    // ঘনঘন গেম ওভার এড়াতে রিসেট বা রিইনিট করা হবে
+                    score = 0;
+                    snake = [{x: 160, y: 200}, {x: 150, y: 200}, {x: 140, y: 200}];
+                    dx = 10;
+                    dy = 0;
+                }
+                clearCanvas();
+                drawFood();
+                moveSnake();
+                drawSnake();
+                document.getElementById('gameScore').innerText = score;
+            }
+
+            function clearCanvas() {
+                ctx.fillStyle = "#172a21";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            function drawSnake() {
+                snake.forEach((part, index) => {
+                    ctx.fillStyle = index === 0 ? "#48bb78" : "#68d391";
+                    ctx.fillRect(part.x, part.y, 9, 9);
+                });
+            }
+
+            function moveSnake() {
+                const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+                
+                // দেয়াল পার হলে অপর পাশ দিয়ে বের হবে (গেম ওভার এড়ানোর আধুনিক পদ্ধতি)
+                if(head.x >= canvas.width) head.x = 0;
+                if(head.x < 0) head.x = canvas.width - 10;
+                if(head.y >= canvas.height) head.y = 0;
+                if(head.y < 0) head.y = canvas.height - 10;
+
+                snake.unshift(head);
+                
+                const hasEatenFood = snake[0].x === foodX && snake[0].y === foodY;
+                if(hasEatenFood) {
+                    score += 10;
+                    createFood();
+                } else {
+                    snake.pop();
+                }
+            }
+
+            function drawFood() {
+                ctx.fillStyle = "#f56565";
+                ctx.fillRect(foodX, foodY, 9, 9);
+            }
+
+            function hasGameEnded() {
+                for(let i = 4; i < snake.length; i++) {
+                    if(snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
+                }
+                return false;
+            }
+
+            // টাচ ও মাউস কন্ট্রোল (স্মুথ ডিরেকশন চেঞ্জ)
+            let touchStartX = 0;
+            let touchStartY = 0;
+            canvas.addEventListener('touchstart', e => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            });
+            canvas.addEventListener('touchmove', e => {
+                if(!touchStartX || !touchStartY) return;
+                let diffX = e.touches[0].clientX - touchStartX;
+                let diffY = e.touches[0].clientY - touchStartY;
+                if(Math.abs(diffX) > Math.abs(diffY)) {
+                    if(diffX > 0 && dx === 0) { dx = 10; dy = 0; }
+                    else if(diffX < 0 && dx === 0) { dx = -10; dy = 0; }
+                } else {
+                    if(diffY > 0 && dy === 0) { dy = 10; dx = 0; }
+                    else if(diffY < 0 && dy === 0) { dy = -10; dx = 0; }
+                }
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                e.preventDefault();
+            }, {passive: false});
+
+            gameInterval = setInterval(main, 100);
+        }
+
+        renderTopupItems();
+        updateUI();
+    </script>
+</body>
+</html>

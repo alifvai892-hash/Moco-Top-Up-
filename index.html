@@ -2,29 +2,29 @@
 <html lang="bn" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Moco Store - টপ আপ এবং গেম</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Moco Store - মার্চেন্ট প্ল্যাটফর্ম</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #7861FF;
-            --bg: #F7F7FF;
+            --primary: #7B61FF;
+            --bg: #FFFDF0; /* ক্রিম/বাঙ্গি কালার ব্যাকগ্রাউন্ড */
             --card-bg: #FFFFFF;
             --text-dark: #2D3748;
             --text-muted: #718096;
-            --border: #E2E8F0;
-            --nav-bg: #FFFFFF;
+            --border: #EFE8D3;
+            --nav-bg: #FFFDF8;
         }
 
         [data-theme="dark"] {
-            --primary: #474757;
-            --bg: #111418;
-            --card-bg: #1A202C;
-            --text-dark: #F7FAFp;
+            --primary: #FF5E7E;
+            --bg: #181711;
+            --card-bg: #222019;
+            --text-dark: #F7FAFC;
             --text-muted: #A0AEC0;
-            --border: #2D3748;
-            --nav-bg: #161922;
+            --border: #3A362B;
+            --nav-bg: #1F1D17;
         }
 
         * {
@@ -33,6 +33,7 @@
             padding: 0;
             font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         body {
@@ -42,39 +43,36 @@
         }
 
         .top-navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             background: var(--nav-bg);
-            padding: 12px 16px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-
         .brand-logo {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 18px;
-            font-weight: 950;
+            font-weight: 900;
+            color: var(--primary);
             cursor: pointer;
         }
-
         .brand-logo img {
             width: 32px;
             height: 32px;
             border-radius: 50%;
             object-fit: cover;
         }
-
         .top-actions {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
         .theme-btn {
             background: none;
             border: 1px solid var(--border);
@@ -83,85 +81,163 @@
             height: 34px;
             border-radius: 50%;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
         }
-
         .wallet-pill {
-            background: #E9E7FF;
+            background: #F3EBD3;
             color: var(--primary);
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        /* ইনফিনিটি নোটিশ বার */
+        .notice-bar {
+            background: #FFEAA7;
+            color: #2D3748;
+            padding: 6px 12px;
+            font-size: 12px;
             font-weight: 600;
+            overflow: hidden;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border);
+        }
+        .notice-bar marquee {
+            display: block;
         }
 
         .main-container {
-            padding: 16px;
-            max-width: 600px;
-            margin: auto;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 12px;
         }
 
-        .view {
+        .banner-box {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
             display: none;
+            border: 1px solid var(--border);
         }
-
-        .view.active {
+        .banner-box img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
             display: block;
         }
+        .banner-title {
+            padding: 8px 12px;
+            background: var(--card-bg);
+            font-size: 13px;
+            font-weight: 700;
+        }
 
-        .card {
+        .game-widget-btn {
+            background: linear-gradient(135deg, #00b894, #55efc4);
+            color: #111;
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 184, 148, 0.25);
+            font-weight: 800;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 14px 0 10px;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .event-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
-
-        .btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
+        .event-banner-wrap {
+            position: relative;
             width: 100%;
-            text-align: center;
-            display: block;
+            height: 155px;
+            background: #1e272e;
+            cursor: pointer;
         }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
+        .event-banner-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .event-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.75);
+            color: #fff;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .event-card-body {
+            padding: 12px;
+            cursor: pointer;
+        }
+        .event-title {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .event-items-count {
+            font-size: 12px;
+            color: var(--text-muted);
         }
 
         .item-selection-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-top: 10px;
         }
-
-        .item-card {
+        .item-tile {
+            background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 10px;
             text-align: center;
             cursor: pointer;
         }
-
-        .item-card.selected {
-            border-color: var(--primary);
-            background: rgba(120, 97, 255, 0.05);
-        }
-
-        #gameCanvas {
-            background: #172a21;
-            border-radius: 12px;
+        .item-tile img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin: 0 auto 6px;
             display: block;
-            margin: 0 auto;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            touch-action: none;
+        }
+        .item-tile-name {
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .item-tile-price {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 13px;
+            margin-top: 4px;
         }
 
         .bottom-nav {
@@ -169,334 +245,746 @@
             bottom: 0;
             left: 0;
             right: 0;
+            height: 62px;
             background: var(--nav-bg);
-            border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            align-items: center;
+            border-top: 1px solid var(--border);
             z-index: 100;
         }
-
         .nav-item {
-            text-align: center;
-            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             font-size: 11px;
+            color: var(--text-muted);
             cursor: pointer;
+            gap: 3px;
+            flex: 1;
         }
-
         .nav-item.active {
             color: var(--primary);
+            font-weight: 700;
         }
 
-        .nav-item i {
-            font-size: 18px;
+        .page-view { display: none; }
+        .page-view.active-view { display: block; }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 14px;
+        }
+        .modal-dialog {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 16px;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+        .form-group { margin-bottom: 12px; }
+        .form-group label {
             display: block;
-            margin-bottom: 2px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-dark);
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+        }
+        .btn-submit {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 11px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+        .btn-cancel {
+            background: var(--border);
+            color: var(--text-dark);
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* ওয়ার্মস জোন গেম স্টাইল */
+        #gameModal .modal-dialog {
+            max-width: 360px;
+            padding: 12px;
+            background: #172a21;
+            border: 2px solid #2ecc71;
+            text-align: center;
+        }
+        #gameCanvas {
+            background: #0f1d17;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            touch-action: none;
         }
     </style>
 </head>
 <body>
 
     <header class="top-navbar">
-        <div class="brand-logo" onclick="switchView('home')">
-            <img id="navLogo" src="https://via.placeholder.com/32" alt="Logo">
-            <span id="navBrandName">Moco Store</span>
+        <div class="brand-logo" onclick="switchTab('home')">
+            <img id="navbarLogoImg" src="https://api.iconify.design/fluent-emoji-flat:crown.svg" alt="Logo">
+            <span id="navbarBrandName">Moco Store</span>
         </div>
         <div class="top-actions">
-            <div class="wallet-pill" id="userWallet">৳ 0</div>
-            <button class="theme-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+            <button class="theme-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+            <div class="wallet-pill" onclick="switchTab('account')">
+                <i class="fa-solid fa-wallet"></i> ৳<span id="userWallet">0.00</span>
+            </div>
         </div>
     </header>
 
+    <div class="notice-bar" id="noticeBarContainer" style="display:none;">
+        <marquee id="noticeText">স্বাগতম মোকো স্টোরে!</marquee>
+    </div>
+
     <div class="main-container">
-        <!-- হোম পেজ -->
-        <div id="viewHome" class="view active">
-            <div class="card">
-                <h3>ফ্রি ফায়ার ডায়মন্ড ও টপ-আপ</h3>
-                <p style="color:var(--text-muted); font-size:13px; margin-top:5px;">নিরাপদে ও দ্রুত টপ-আপ করুন।</p>
-                <div class="item-selection-grid" id="topupItemsContainer"></div>
-                <div style="margin-top:15px;">
-                    <input type="text" id="gamePlayerId" placeholder="আপনার গেম ইউআইডি (UID) লিখুন" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--bg); color:var(--text-dark); margin-bottom:10px;">
-                    <button class="btn" onclick="processTopUp()">পেমেন্ট করুন ও অর্ডার দিন</button>
+
+        <!-- HOME -->
+        <div id="viewHome" class="page-view active-view">
+            <div class="banner-box" id="homeBannerWrap">
+                <img id="homeBannerImg" src="" alt="Banner">
+                <div class="banner-title" id="homeBannerTitle"></div>
+            </div>
+
+            <div class="game-widget-btn" onclick="openWormsGame()">
+                <span><i class="fa-solid fa-worm"></i> ওয়ার্মস জোন স্নেক গেম খেলুন 🐍</span>
+                <i class="fa-solid fa-play"></i>
+            </div>
+
+            <div class="section-header">
+                <span>চলমান ইভেন্টসমূহ</span>
+            </div>
+
+            <div id="eventsListContainer"></div>
+        </div>
+
+        <!-- ORDERS / HISTORY -->
+        <div id="viewOrders" class="page-view">
+            <div class="section-header"><span>মাই অর্ডার্স ও হিস্ট্রি</span></div>
+            <div id="ordersListContainer"></div>
+        </div>
+
+        <!-- ACCOUNT -->
+        <div id="viewAccount" class="page-view">
+            <div id="userProfileBox" style="display:none;" class="modal-dialog">
+                <div style="text-align:center;">
+                    <i class="fa-solid fa-circle-user" style="font-size:55px; color:var(--primary); margin-bottom:10px;"></i>
+                    <h3 id="profileName">User</h3>
+                    <p id="profileEmail" style="font-size:12px; color:var(--text-muted);"></p>
+                    <div style="margin: 15px 0; padding:12px; background:var(--bg); border-radius:10px;">
+                        ওয়ালেট ব্যালেন্স: <b style="color:var(--primary); font-size:16px;">৳<span id="accountWalletVal">0.00</span></b>
+                    </div>
+                    <button class="btn-cancel" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> লগআউট করুন</button>
                 </div>
             </div>
 
-            <div class="card" style="text-align: center;">
-                <h3>মিনি গেম (ওয়ার্মস স্নেক)</h3>
-                <p style="color:var(--text-muted); font-size:13px; margin:5px 0 15px 0;">স্মুথ কন্ট্রোল দিয়ে খেলুন এবং পয়েন্ট অর্জন করুন!</p>
-                <button class="btn" onclick="switchView('game')">গেম খেলুন</button>
+            <div id="authBox" class="modal-dialog" style="text-align: center; padding: 30px 20px;">
+                <h3 style="margin-bottom:8px; color:var(--primary);">মোকো স্টোর অ্যাকাউন্ট</h3>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">অর্ডার ও ওয়ালেট ব্যবহারের জন্য প্রথমবার সাইন-আপ বা লগইন করুন</p>
+                <button class="btn-submit" onclick="loginWithGoogle()" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; color: #333; border: 1px solid var(--border); font-weight: 600;">
+                    <i class="fa-brands fa-google" style="color: #ea4335; font-size: 16px;"></i> গুগল দিয়ে সাইন-আপ / লগইন
+                </button>
             </div>
         </div>
 
-        <!-- গেম পেজ -->
-        <div id="viewGame" class="view">
-            <div class="card" style="text-align:center;">
-                <h3 style="margin-bottom:10px;">স্নেক জোন গেম</h3>
-                <p style="font-size:14px; margin-bottom:10px;">স্কোর: <span id="gameScore">0</span></p>
-                <canvas id="gameCanvas" width="320" height="400"></canvas>
-                <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">স্ক্রিনে আঙুল টেনে বা মাউস দিয়ে সাপ নিয়ন্ত্রণ করুন।</p>
+        <!-- ADMIN SETTINGS TAB -->
+        <div id="viewAdmin" class="page-view">
+            <div class="modal-dialog">
+                <h3 style="color:var(--primary); margin-bottom:15px;"><i class="fa-solid fa-user-shield"></i> অ্যাডমিন সেটিংস প্যানেল</h3>
+                
+                <div class="form-group">
+                    <label>ওয়েবসাইটের নাম:</label>
+                    <input type="text" id="settingAppName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>লোগো URL (গ্যালারি/লিঙ্ক থেকে চুজ করুন):</label>
+                    <input type="text" id="settingLogoUrl" class="form-control" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>বিকাশ নম্বর (পেমেন্টের জন্য):</label>
+                    <input type="text" id="settingBkashNo" class="form-control" placeholder="017XXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>নগদ নম্বর (পেমেন্টের জন্য):</label>
+                    <input type="text" id="settingNagadNo" class="form-control" placeholder="018XXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>হোম পেজ ব্যানার URL:</label>
+                    <input type="text" id="settingBannerUrl" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>হোম পেজ ব্যানার টাইটেল:</label>
+                    <input type="text" id="settingBannerTitle" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>ইনফিনিটি নোটিশ বার মেসেজ:</label>
+                    <input type="text" id="settingNotice" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>বাটন থিম কালার নির্ধারণ:</label>
+                    <select id="settingPrimaryColor" class="form-control">
+                        <option value="#7B61FF">পার্পল (বেগুনী)</option>
+                        <option value="#27ae60">গ্রীন (সবুজ)</option>
+                        <option value="#2980b9">ব্লু (নীল)</option>
+                        <option value="#e67e22">অরেঞ্জ/গোল্ডেন</option>
+                    </select>
+                </div>
+                
+                <button class="btn-submit" onclick="saveAdminSettings()">সেটিংস সংরক্ষণ করুন</button>
+                <hr style="margin:15px 0; border:0; border-top:1px solid var(--border);">
+                <button class="btn-submit" style="background:#27ae60;" onclick="openAdminEventModal()">+ নতুন ইভেন্ট যুক্ত করুন</button>
             </div>
         </div>
 
-        <!-- অ্যাকাউন্ট পেজ -->
-        <div id="viewAccount" class="view">
-            <div class="card" style="text-align: center;">
-                <div id="authSection">
-                    <h3>লগইন বা সাইন আপ করুন</h3>
-                    <p style="color:var(--text-muted); font-size:13px; margin:10px 0;">গুগল অ্যাকাউন্ট দিয়ে এক ক্লিকে প্রবেশ করুন।</p>
-                    <button class="btn" onclick="googleLogin()"><i class="fa-brands fa-google"></i> গুগল দিয়ে লগইন/সাইন আপ</button>
-                </div>
-                <div id="userProfileSection" style="display:none;">
-                    <img id="userAvatar" src="" style="width:60px; height:60px; border-radius:50%; margin-bottom:10px;">
-                    <h3 id="userName">User Name</h3>
-                    <p id="userEmail" style="color:var(--text-muted); font-size:13px; margin-bottom:15px;"></p>
-                    <button class="btn btn-outline" onclick="logout()">লগআউট</button>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <!-- এডমিন প্যানেল -->
-        <div id="viewAdmin" class="view">
-            <div class="card">
-                <h3>অ্যাডমিন প্যানেল</h3>
-                <p style="color:var(--text-muted); font-size:13px; margin-top:5px;">ওয়েবসাইটের তথ্য ও পেমেন্ট নম্বর সেটআপ করুন</p>
-                <div style="margin-top:15px;">
-                    <label style="font-size:13px; font-weight:600;">ওয়েবসাইটের নাম</label>
-                    <input type="text" id="adminSiteName" style="width:100%; padding:8px; border:1px solid var(--border); border-radius:6px; margin:5px 0 10px 0; background:var(--bg); color:var(--text-dark);">
-                    
-                    <label style="font-size:13px; font-weight:600;">বিকাশ/নগদ পেমেন্ট নম্বর</label>
-                    <input type="text" id="adminPaymentNo" placeholder="017xxxxxxxx" style="width:100%; padding:8px; border:1px solid var(--border); border-radius:6px; margin:5px 0 10px 0; background:var(--bg); color:var(--text-dark);">
-                    
-                    <button class="btn" onclick="saveAdminSettings()">সেটিংস সংরক্ষণ করুন</button>
-                </div>
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home', this)">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('orders', this)">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>অর্ডার</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('account', this)">
+            <i class="fa-solid fa-user"></i>
+            <span>প্রোফাইল</span>
+        </div>
+        <div class="nav-item" id="adminNavItem" style="display:none;" onclick="switchTab('admin', this)">
+            <i class="fa-solid fa-lock"></i>
+            <span>এডমিন</span>
+        </div>
+    </nav>
+
+    <!-- ADMIN EVENT CREATION MODAL -->
+    <div class="modal-overlay" id="adminEventModal">
+        <div class="modal-dialog">
+            <h3 style="color:var(--primary); margin-bottom:10px;">🛠️ ইভেন্ট তৈরি</h3>
+            <div class="form-group">
+                <label>ইভেন্ট টাইটেল:</label>
+                <input type="text" id="evtTitle" class="form-control">
             </div>
+            <div class="form-group">
+                <label>ব্যানার ইমেজ লিঙ্ক:</label>
+                <input type="text" id="evtBannerUrl" class="form-control">
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <label style="font-weight:bold; font-size:13px;">প্যাকেজসমূহ:</label>
+                <button type="button" onclick="appendItemRow()" style="background:#27ae60; color:#fff; border:none; padding:4px 8px; border-radius:4px; font-size:11px; cursor:pointer;">+ আইটেম</button>
+            </div>
+            <div id="eventItemsContainer"></div>
+            <button class="btn-submit" onclick="submitEventData()">পাবলিশ করুন</button>
+            <button class="btn-cancel" onclick="closeModal('adminEventModal')">বাতিল</button>
         </div>
     </div>
 
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchView('home')"><i class="fa-solid fa-house"></i>হোম</div>
-        <div class="nav-item" onclick="switchView('game')"><i class="fa-solid fa-gamepad"></i>গেম</div>
-        <div class="nav-item" onclick="switchView('account')"><i class="fa-solid fa-user"></i>অ্যাকাউন্ট</div>
-        <div class="nav-item" onclick="switchView('admin')"><i class="fa-solid fa-lock"></i>এডমিন</div>
-    </nav>
+    <!-- EVENT DETAILS & PURCHASE MODAL -->
+    <div class="modal-overlay" id="eventDetailsModal">
+        <div class="modal-dialog">
+            <h3 id="detailEvtTitle" style="color:var(--primary); margin-bottom:6px;"></h3>
+            <div id="detailMediaWrap" style="margin-bottom:12px;"></div>
+            <label style="font-weight:700; font-size:13px;">প্যাকেজ নির্বাচন:</label>
+            <div class="item-selection-grid" id="detailItemsGrid"></div>
+            <div id="purchaseFormSection" style="display:none; margin-top:12px;">
+                <div class="form-group">
+                    <label>প্লেয়ার UID:</label>
+                    <input type="text" id="orderPlayerUid" class="form-control" placeholder="UID দিন">
+                </div>
+                <div class="form-group">
+                    <label>পেমেন্ট মাধ্যম:</label>
+                    <select id="orderPayType" class="form-control" onchange="toggleDirectTrx()">
+                        <option value="bKash">বিকাশ</option>
+                        <option value="Nagad">নগদ</option>
+                        <option value="Wallet">ওয়ালেট ব্যালেন্স</option>
+                    </select>
+                </div>
+                <div id="directTrxBox" style="background:var(--bg); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <p style="font-size:12px; color:var(--primary);">পেমেন্ট নম্বর: <b id="payNumberDisplay">017XXXXXXXX</b></p>
+                    <input type="text" id="orderTrx" class="form-control" placeholder="TrxID প্রদান করুন" style="margin-top:6px;">
+                </div>
+                <button class="btn-submit" onclick="submitOrder()">পেমেন্ট করুন ও অর্ডার দিন (৳<span id="selectedItemPrice">0</span>)</button>
+            </div>
+            <button class="btn-cancel" onclick="closeModal('eventDetailsModal')">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <!-- WORMS ZONE SNAKE GAME MODAL -->
+    <div class="modal-overlay" id="gameModal">
+        <div class="modal-dialog">
+            <div style="display:flex; justify-content:space-between; color:#fff; font-size:13px; font-weight:bold; margin-bottom:8px;">
+                <span>স্কোর: <span id="snakeScore">0</span></span>
+                <span>লাইফ: <span id="snakeLives">❤️ 3</span></span>
+            </div>
+            <canvas id="gameCanvas" width="300" height="320"></canvas>
+            <p style="font-size:11px; color:#aaa; margin-top:6px;">স্ক্রিনে আঙুল টেনে বা মাউস দিয়ে সাপ পরিচালনা করুন।</p>
+            <button class="btn-cancel" style="background:rgba(255,255,255,0.2); color:#fff; margin-top:8px;" onclick="closeWormsGame()">গেম বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
     <script>
-        // লোকাল স্টোরেজ ডাটা ম্যানেজমেন্ট
-        let appData = JSON.parse(localStorage.getItem('moco_data')) || {
-            siteName: "Moco Store",
-            paymentNo: "01712345678",
-            user: null,
-            wallet: 50
+        const firebaseConfig = {
+            apiKey: "AIzaSyA813ETR3hxfcUqyILdr1wSVgyXI1MvvNg",
+            authDomain: "gamestore-3addc.firebaseapp.com",
+            databaseURL: "https://gamestore-3addc-default-rtdb.firebaseio.com",
+            projectId: "gamestore-3addc",
+            storageBucket: "gamestore-3addc.firebasestorage.app",
+            messagingSenderId: "243275206854",
+            appId: "1:243275206854:web:2feb8968aad9e27eb547c7"
         };
 
-        function saveData() {
-            localStorage.setItem('moco_data', JSON.stringify(appData));
-            updateUI();
-        }
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
 
-        function updateUI() {
-            document.getElementById('navBrandName').innerText = appData.siteName;
-            document.getElementById('userWallet').innerText = `৳ ${appData.wallet}`;
-            if(appData.user) {
-                document.getElementById('authSection').style.display = 'none';
-                document.getElementById('userProfileSection').style.display = 'block';
-                document.getElementById('userName').innerText = appData.user.name;
-                document.getElementById('userEmail').innerText = appData.user.email;
-                document.getElementById('userAvatar').src = appData.user.avatar || 'https://via.placeholder.com/60';
-            } else {
-                document.getElementById('authSection').style.display = 'block';
-                document.getElementById('userProfileSection').style.display = 'none';
-            }
-            document.getElementById('adminSiteName').value = appData.siteName;
-            document.getElementById('adminPaymentNo').value = appData.paymentNo;
-        }
-
-        function switchView(viewName) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            
-            if(viewName === 'home') {
-                document.getElementById('viewHome').classList.add('active');
-                document.querySelectorAll('.nav-item')[0].classList.add('active');
-            } else if(viewName === 'game') {
-                document.getElementById('viewGame').classList.add('active');
-                document.querySelectorAll('.nav-item')[1].classList.add('active');
-                initGame();
-            } else if(viewName === 'account') {
-                document.getElementById('viewAccount').classList.add('active');
-                document.querySelectorAll('.nav-item')[2].classList.add('active');
-            } else if(viewName === 'admin') {
-                document.getElementById('viewAdmin').classList.add('active');
-                document.querySelectorAll('.nav-item')[3].classList.add('active');
-            }
-        }
+        let currentUser = JSON.parse(localStorage.getItem('moco_user') || 'null');
+        let appEvents = [];
+        let selectedItemForOrder = null;
+        let siteSettings = { bkash: '01700000000', nagad: '01800000000' };
 
         function toggleTheme() {
-            const html = document.documentElement;
-            if(html.getAttribute('data-theme') === 'dark') {
-                html.setAttribute('data-theme', 'light');
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            document.getElementById('themeIcon').className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        function isAdmin() {
+            return currentUser && currentUser.email === 'alifvai892@gmail.com';
+        }
+
+        async function loadSiteSettings() {
+            try {
+                const doc = await db.collection('settings').doc('general').get();
+                if (doc.exists) {
+                    const data = doc.data();
+                    if (data.appName) {
+                        document.getElementById('navbarBrandName').innerText = data.appName;
+                        document.title = data.appName;
+                    }
+                    if (data.logoUrl) document.getElementById('navbarLogoImg').src = data.logoUrl;
+                    if (data.primaryColor) document.documentElement.style.setProperty('--primary', data.primaryColor);
+                    
+                    if (data.notice) {
+                        document.getElementById('noticeBarContainer').style.display = 'block';
+                        document.getElementById('noticeText').innerText = data.notice;
+                    }
+                    if (data.bannerUrl) {
+                        document.getElementById('homeBannerWrap').style.display = 'block';
+                        document.getElementById('homeBannerImg').src = data.bannerUrl;
+                        document.getElementById('homeBannerTitle').innerText = data.bannerTitle || '';
+                    }
+                    siteSettings.bkash = data.bkash || '01700000000';
+                    siteSettings.nagad = data.nagad || '01800000000';
+                    toggleDirectTrx();
+                }
+            } catch(e) { console.error(e); }
+        }
+
+        async function updateAuthStateUI() {
+            await loadSiteSettings();
+            if (currentUser && currentUser.email) {
+                const userDoc = await db.collection('users').doc(currentUser.email).get();
+                if (userDoc.exists) {
+                    currentUser.wallet = userDoc.data().wallet || 0;
+                } else {
+                    currentUser.wallet = 0;
+                    await db.collection('users').doc(currentUser.email).set({ wallet: 0 }, { merge: true });
+                }
+                localStorage.setItem('moco_user', JSON.stringify(currentUser));
+
+                document.getElementById('userWallet').innerText = parseFloat(currentUser.wallet).toFixed(2);
+                document.getElementById('accountWalletVal').innerText = parseFloat(currentUser.wallet).toFixed(2);
+                document.getElementById('profileName').innerText = currentUser.name || currentUser.email.split('@')[0];
+                document.getElementById('profileEmail').innerText = currentUser.email;
+
+                document.getElementById('authBox').style.display = 'none';
+                document.getElementById('userProfileBox').style.display = 'block';
+                document.getElementById('adminNavItem').style.display = isAdmin() ? 'flex' : 'none';
             } else {
-                html.setAttribute('data-theme', 'dark');
+                document.getElementById('userWallet').innerText = '0.00';
+                document.getElementById('authBox').style.display = 'block';
+                document.getElementById('userProfileBox').style.display = 'none';
+                document.getElementById('adminNavItem').style.display = 'none';
+            }
+            renderEvents();
+        }
+
+        async function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                currentUser = { email: result.user.email, name: result.user.displayName, wallet: 0 };
+                await updateAuthStateUI();
+                alert('সফলভাবে গুগল সাইন-আপ/লগইন সম্পন্ন হয়েছে!');
+            } catch (e) {
+                alert('লগইন ব্যর্থ: ' + e.message);
             }
         }
 
-        // গুগল লগইন সিমুলেশন
-        function googleLogin() {
-            appData.user = {
-                name: "আলি ভাই",
-                email: "alifvai892@gmail.com",
-                avatar: "https://via.placeholder.com/60"
-            };
-            saveData();
-            alert("সফলভাবে গুগল লগইন সম্পন্ন হয়েছে!");
+        function logoutUser() {
+            currentUser = null;
+            localStorage.removeItem('moco_user');
+            auth.signOut();
+            updateAuthStateUI();
         }
 
-        function logout() {
-            appData.user = null;
-            saveData();
+        async function saveAdminSettings() {
+            const appName = document.getElementById('settingAppName').value;
+            const logoUrl = document.getElementById('settingLogoUrl').value;
+            const bkash = document.getElementById('settingBkashNo').value;
+            const nagad = document.getElementById('settingNagadNo').value;
+            const bannerUrl = document.getElementById('settingBannerUrl').value;
+            const bannerTitle = document.getElementById('settingBannerTitle').value;
+            const notice = document.getElementById('settingNotice').value;
+            const primaryColor = document.getElementById('settingPrimaryColor').value;
+
+            await db.collection('settings').doc('general').set({
+                appName, logoUrl, bkash, nagad, bannerUrl, bannerTitle, notice, primaryColor
+            }, { merge: true });
+
+            alert('অ্যাডমিন সেটিংস আপডেট হয়েছে!');
+            loadSiteSettings();
         }
 
-        // এডমিন সেটিংস সেভ
-        function saveAdminSettings() {
-            appData.siteName = document.getElementById('adminSiteName').value;
-            appData.paymentNo = document.getElementById('adminPaymentNo').value;
-            saveData();
-            alert("এডমিন সেটিংস সফলভাবে আপডেট করা হয়েছে!");
+        async function fetchEvents() {
+            const snapshot = await db.collection('events').get();
+            appEvents = [];
+            snapshot.forEach(doc => appEvents.push({ id: doc.id, ...doc.data() }));
+            renderEvents();
         }
 
-        // টপ আপ আইটেম রেন্ডার
-        const topupItems = [
-            {name: "25 Diamonds", price: "৳ ২৫"},
-            {name: "50 Diamonds", price: "৳ ৫০"},
-            {name: "100 Diamonds", price: "৳ ১০০"}
-        ];
-        let selectedItem = null;
-
-        function renderTopupItems() {
-            const container = document.getElementById('topupItemsContainer');
-            container.innerHTML = '';
-            topupItems.forEach((item, index) => {
-                const div = document.createElement('div');
-                div.className = `item-card ${selectedItem === index ? 'selected' : ''}`;
-                div.innerHTML = `<strong>${item.name}</strong><br><span style="font-size:12px; color:var(--primary);">${item.price}</span>`;
-                div.onclick = () => { selectedItem = index; renderTopupItems(); };
-                container.appendChild(div);
+        function renderEvents() {
+            const box = document.getElementById('eventsListContainer');
+            if(!box) return;
+            box.innerHTML = '';
+            appEvents.forEach(evt => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `
+                    <div class="event-banner-wrap" onclick="showEventDetails('${evt.id}')">
+                        <span class="event-badge"><i class="fa-solid fa-bolt"></i> ইভেন্ট</span>
+                        <img src="${evt.banner || 'https://via.placeholder.com/400x150'}" alt="">
+                    </div>
+                    <div class="event-card-body" onclick="showEventDetails('${evt.id}')">
+                        <div class="event-title">${evt.title}</div>
+                        <div class="event-items-count">প্যাকেজ: ${(evt.items || []).length} টি</div>
+                    </div>
+                `;
+                box.appendChild(card);
             });
         }
 
-        function processTopUp() {
-            const uid = document.getElementById('gamePlayerId').value;
-            if(!uid) { alert("দয়া করে আপনার গেম ইউআইডি (UID) লিখুন।"); return; }
-            if(selectedItem === null) { alert("দয়া করে একটি ডায়মন্ড প্যাকেজ সিলেক্ট করুন।"); return; }
-            alert(`আপনার অর্ডারটি গ্রহণ করা হয়েছে! পেমেন্ট পাঠানোর জন্য এডমিন নম্বর (${appData.paymentNo}) তে টাকা পাঠান।`);
-        }
-
-        // স্মুথ স্নেক গেম লজিক (ঘনঘন গেম ওভার ফিক্সড)
-        let gameInterval = null;
-        function initGame() {
-            if(gameInterval) clearInterval(gameInterval);
-            const canvas = document.getElementById('gameCanvas');
-            const ctx = canvas.getContext('2d');
+        function showEventDetails(evtId) {
+            const evt = appEvents.find(e => e.id === evtId);
+            if (!evt) return;
+            document.getElementById('detailEvtTitle').innerText = evt.title;
+            document.getElementById('detailMediaWrap').innerHTML = `<img src="${evt.banner}" style="width:100%; height:140px; object-fit:cover; border-radius:10px;">`;
             
-            let snake = [{x: 160, y: 200}, {x: 150, y: 200}, {x: 140, y: 200}];
-            let dx = 10;
-            let dy = 0;
-            let foodX, foodY;
-            let score = 0;
+            const grid = document.getElementById('detailItemsGrid');
+            grid.innerHTML = '';
+            selectedItemForOrder = null;
+            document.getElementById('purchaseFormSection').style.display = 'none';
 
-            function createFood() {
-                foodX = Math.floor(Math.random() * (canvas.width / 10)) * 10;
-                foodY = Math.floor(Math.random() * (canvas.height / 10)) * 10;
-            }
-            createFood();
-
-            function main() {
-                if(hasGameEnded()) {
-                    // ঘনঘন গেম ওভার এড়াতে রিসেট বা রিইনিট করা হবে
-                    score = 0;
-                    snake = [{x: 160, y: 200}, {x: 150, y: 200}, {x: 140, y: 200}];
-                    dx = 10;
-                    dy = 0;
-                }
-                clearCanvas();
-                drawFood();
-                moveSnake();
-                drawSnake();
-                document.getElementById('gameScore').innerText = score;
-            }
-
-            function clearCanvas() {
-                ctx.fillStyle = "#172a21";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-
-            function drawSnake() {
-                snake.forEach((part, index) => {
-                    ctx.fillStyle = index === 0 ? "#48bb78" : "#68d391";
-                    ctx.fillRect(part.x, part.y, 9, 9);
-                });
-            }
-
-            function moveSnake() {
-                const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-                
-                // দেয়াল পার হলে অপর পাশ দিয়ে বের হবে (গেম ওভার এড়ানোর আধুনিক পদ্ধতি)
-                if(head.x >= canvas.width) head.x = 0;
-                if(head.x < 0) head.x = canvas.width - 10;
-                if(head.y >= canvas.height) head.y = 0;
-                if(head.y < 0) head.y = canvas.height - 10;
-
-                snake.unshift(head);
-                
-                const hasEatenFood = snake[0].x === foodX && snake[0].y === foodY;
-                if(hasEatenFood) {
-                    score += 10;
-                    createFood();
-                } else {
-                    snake.pop();
-                }
-            }
-
-            function drawFood() {
-                ctx.fillStyle = "#f56565";
-                ctx.fillRect(foodX, foodY, 9, 9);
-            }
-
-            function hasGameEnded() {
-                for(let i = 4; i < snake.length; i++) {
-                    if(snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
-                }
-                return false;
-            }
-
-            // টাচ ও মাউস কন্ট্রোল (স্মুথ ডিরেকশন চেঞ্জ)
-            let touchStartX = 0;
-            let touchStartY = 0;
-            canvas.addEventListener('touchstart', e => {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
+            (evt.items || []).forEach(item => {
+                const tile = document.createElement('div');
+                tile.className = 'item-tile';
+                tile.onclick = () => {
+                    document.querySelectorAll('.item-tile').forEach(t => t.style.borderColor = 'var(--border)');
+                    tile.style.borderColor = 'var(--primary)';
+                    selectedItemForOrder = item;
+                    document.getElementById('selectedItemPrice').innerText = item.price;
+                    document.getElementById('purchaseFormSection').style.display = 'block';
+                };
+                tile.innerHTML = `
+                    <img src="${item.img || 'https://via.placeholder.com/50'}" alt="">
+                    <div class="item-tile-name">${item.name}</div>
+                    <div class="item-tile-price">৳${item.price}</div>
+                `;
+                grid.appendChild(tile);
             });
-            canvas.addEventListener('touchmove', e => {
-                if(!touchStartX || !touchStartY) return;
-                let diffX = e.touches[0].clientX - touchStartX;
-                let diffY = e.touches[0].clientY - touchStartY;
-                if(Math.abs(diffX) > Math.abs(diffY)) {
-                    if(diffX > 0 && dx === 0) { dx = 10; dy = 0; }
-                    else if(diffX < 0 && dx === 0) { dx = -10; dy = 0; }
-                } else {
-                    if(diffY > 0 && dy === 0) { dy = 10; dx = 0; }
-                    else if(diffY < 0 && dy === 0) { dy = -10; dx = 0; }
-                }
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-                e.preventDefault();
-            }, {passive: false});
-
-            gameInterval = setInterval(main, 100);
+            openModal('eventDetailsModal');
         }
 
-        renderTopupItems();
-        updateUI();
+        function toggleDirectTrx() {
+            const val = document.getElementById('orderPayType').value;
+            const box = document.getElementById('directTrxBox');
+            if (val === 'bKash') {
+                box.style.display = 'block';
+                document.getElementById('payNumberDisplay').innerText = siteSettings.bkash + ' (বিকাশ)';
+            } else if (val === 'Nagad') {
+                box.style.display = 'block';
+                document.getElementById('payNumberDisplay').innerText = siteSettings.nagad + ' (নগদ)';
+            } else {
+                box.style.display = 'none';
+            }
+        }
+
+        async function submitOrder() {
+            if (!currentUser) return alert('দয়া করে প্রথমে অ্যাকাউন্টে লগইন করুন!');
+            const uid = document.getElementById('orderPlayerUid').value.trim();
+            const payType = document.getElementById('orderPayType').value;
+            const trx = document.getElementById('orderTrx').value.trim();
+
+            if (!uid) return alert('ইউআইডি (UID) প্রদান করুন!');
+            if (payType !== 'Wallet' && !trx) return alert('ট্রানজেকশন আইডি (TrxID) দিন!');
+
+            if (payType === 'Wallet') {
+                if (currentUser.wallet < selectedItemForOrder.price) return alert('অপর্যাপ্ত ওয়ালেট ব্যালেন্স!');
+                currentUser.wallet -= selectedItemForOrder.price;
+                await db.collection('users').doc(currentUser.email).update({ wallet: currentUser.wallet });
+            }
+
+            await db.collection('orders').add({
+                uid, item: selectedItemForOrder.name, price: selectedItemForOrder.price,
+                pay_type: payType, trx: trx || 'Wallet', email: currentUser.email,
+                status: 'Pending', timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            alert('আপনার অর্ডারটি সফলভাবে জমা হয়েছে!');
+            closeModal('eventDetailsModal');
+            updateAuthStateUI();
+        }
+
+        async function loadOrders() {
+            const box = document.getElementById('ordersListContainer');
+            if(!box) return;
+            box.innerHTML = '';
+
+            let query = db.collection('orders').orderBy('timestamp', 'desc');
+            if (!isAdmin()) {
+                if(!currentUser) return box.innerHTML = '<p style="text-align:center;">লগইন করুন</p>';
+                query = query.where('email', '==', currentUser.email);
+            }
+
+            const snapshot = await query.get();
+            if (snapshot.empty) return box.innerHTML = '<p style="text-align:center; color:var(--text-muted);">কোনো অর্ডার পাওয়ার যায়নি</p>';
+
+            snapshot.forEach(doc => {
+                const o = doc.data();
+                const id = doc.id;
+                const el = document.createElement('div');
+                el.style = 'background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:10px;';
+                
+                let adminActionHtml = '';
+                if (isAdmin() && o.status === 'Pending') {
+                    adminActionHtml = `
+                        <div style="margin-top:8px; display:flex; gap:6px;">
+                            <button onclick="approveOrder('${id}')" style="background:#27ae60; color:#fff; border:none; padding:5px 10px; border-radius:6px; font-size:11px; cursor:pointer;">অনুমোদন</button>
+                            <button onclick="rejectOrder('${id}')" style="background:#ff4757; color:#fff; border:none; padding:5px 10px; border-radius:6px; font-size:11px; cursor:pointer;">বাতিল</button>
+                        </div>
+                    `;
+                }
+
+                el.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:13px;">
+                        <span>${o.item}</span>
+                        <span style="color:${o.status==='Approved'?'#27ae60':(o.status==='Rejected'?'#ff4757':'#e67e22')}">${o.status}</span>
+                    </div>
+                    <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">UID: <b>${o.uid}</b> | ৳${o.price}</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">পেমেন্ট: ${o.pay_type} (${o.trx})</div>
+                    ${adminActionHtml}
+                `;
+                box.appendChild(el);
+            });
+        }
+
+        async function approveOrder(id) {
+            await db.collection('orders').doc(id).update({ status: 'Approved' });
+            alert('অর্ডার অনুমোদিত হয়েছে!');
+            loadOrders();
+        }
+
+        async function rejectOrder(id) {
+            await db.collection('orders').doc(id).update({ status: 'Rejected' });
+            alert('অর্ডার বাতিল করা হয়েছে!');
+            loadOrders();
+        }
+
+        function openAdminEventModal() {
+            document.getElementById('eventItemsContainer').innerHTML = '';
+            appendItemRow();
+            openModal('adminEventModal');
+        }
+
+        function appendItemRow() {
+            const div = document.createElement('div');
+            div.className = 'item-row';
+            div.style = 'background:var(--bg); padding:8px; border-radius:8px; margin-bottom:8px; display:flex; gap:6px; flex-direction:column;';
+            div.innerHTML = `
+                <input type="text" class="form-control item-name-input" placeholder="আইটেমের নাম (যেমন: 100 Diamond)">
+                <div style="display:flex; gap:6px;">
+                    <input type="number" class="form-control item-price-input" placeholder="দাম (৳)" style="flex:1;">
+                    <input type="text" class="form-control item-img-input" placeholder="ছবি URL" style="flex:2;">
+                </div>
+            `;
+            document.getElementById('eventItemsContainer').appendChild(div);
+        }
+
+        async function submitEventData() {
+            const title = document.getElementById('evtTitle').value.trim();
+            const banner = document.getElementById('evtBannerUrl').value.trim();
+            if (!title) return alert('টাইটেল পূরণ করুন!');
+
+            const items = [];
+            document.querySelectorAll('.item-row').forEach(r => {
+                const name = r.querySelector('.item-name-input').value.trim();
+                const price = r.querySelector('.item-price-input').value.trim();
+                const img = r.querySelector('.item-img-input').value.trim();
+                if (name && price) items.push({ id: 'i_' + Date.now(), name, price: parseFloat(price), img });
+            });
+
+            await db.collection('events').add({ title, banner, items });
+            alert('নতুন ইভেন্ট যুক্ত হয়েছে!');
+            closeModal('adminEventModal');
+            fetchEvents();
+        }
+
+        function switchTab(viewId, navEl = null) {
+            document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active-view'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            if (navEl) navEl.classList.add('active');
+
+            if (viewId === 'home') document.getElementById('viewHome').classList.add('active-view');
+            if (viewId === 'orders') {
+                document.getElementById('viewOrders').classList.add('active-view');
+                loadOrders();
+            }
+            if (viewId === 'account') document.getElementById('viewAccount').classList.add('active-view');
+            if (viewId === 'admin') document.getElementById('viewAdmin').classList.add('active-view');
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        /* --- ওয়ার্মস জোন স্নেক গেম ইঞ্জিন --- */
+        const gCanvas = document.getElementById('gameCanvas');
+        const gCtx = gCanvas.getContext('2d');
+        let gSnake = [], gFoods = [], gVx = 2, gVy = 0, gScore = 0, gLives = 3, gIsDead = false, gLoop = null;
+
+        function initWormsGame() {
+            gSnake = [{x: 150, y: 160}, {x: 140, y: 160}, {x: 130, y: 160}];
+            gVx = 2; gVy = 0; gScore = 0; gLives = 3; gIsDead = false;
+            document.getElementById('snakeScore').innerText = gScore;
+            document.getElementById('snakeLives').innerText = '❤️ ' + gLives;
+
+            gFoods = [
+                {x: 60, y: 60, icon: '🍎'}, {x: 220, y: 80, icon: '🍔'},
+                {x: 140, y: 240, icon: '🍫'}, {x: 240, y: 260, icon: '🍕'}
+            ];
+
+            clearInterval(gLoop);
+            gLoop = setInterval(runWormsGameTick, 40);
+        }
+
+        function runWormsGameTick() {
+            if (gIsDead) return;
+
+            const head = { x: gSnake[0].x + gVx, y: gSnake[0].y + gVy };
+
+            if (head.x < 0) head.x = gCanvas.width;
+            if (head.x > gCanvas.width) head.x = 0;
+            if (head.y < 0) head.y = gCanvas.height;
+            if (head.y > gCanvas.height) head.y = 0;
+
+            gSnake.unshift(head);
+
+            let eatenIdx = -1;
+            gFoods.forEach((f, idx) => {
+                if (Math.hypot(head.x - f.x, head.y - f.y) < 16) eatenIdx = idx;
+            });
+
+            if (eatenIdx !== -1) {
+                gScore += 10;
+                document.getElementById('snakeScore').innerText = gScore;
+                gFoods.splice(eatenIdx, 1);
+                const icons = ['🍎', '🍔', '🍫', '🍕', '🍇'];
+                gFoods.push({
+                    x: Math.floor(Math.random() * (gCanvas.width - 30)) + 15,
+                    y: Math.floor(Math.random() * (gCanvas.height - 30)) + 15,
+                    icon: icons[Math.floor(Math.random() * icons.length)]
+                });
+            } else {
+                gSnake.pop();
+            }
+
+            gCtx.fillStyle = '#0f1d17';
+            gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+
+            gFoods.forEach(f => {
+                gCtx.font = '16px sans-serif';
+                gCtx.fillText(f.icon, f.x - 8, f.y + 6);
+            });
+
+            gSnake.forEach((seg, index) => {
+                gCtx.fillStyle = index === 0 ? '#ff4757' : '#ff6b81';
+                gCtx.beginPath();
+                gCtx.arc(seg.x, seg.y, index === 0 ? 8 : 6, 0, Math.PI * 2);
+                gCtx.fill();
+            });
+        }
+
+        function openWormsGame() { openModal('gameModal'); initWormsGame(); }
+        function closeWormsGame() { clearInterval(gLoop); closeModal('gameModal'); }
+
+        let touchStartX = 0, touchStartY = 0;
+        gCanvas.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, {passive: true});
+
+        gCanvas.addEventListener('touchmove', e => {
+            let dX = e.touches[0].clientX - touchStartX;
+            let dY = e.touches[0].clientY - touchStartY;
+            if (Math.abs(dX) > 5 || Math.abs(dY) > 5) {
+                let angle = Math.atan2(dY, dX);
+                gVx = Math.cos(angle) * 2.5;
+                gVy = Math.sin(angle) * 2.5;
+            }
+        }, {passive: true});
+
+        window.onload = async () => {
+            await updateAuthStateUI();
+            fetchEvents();
+        };
     </script>
 </body>
 </html>

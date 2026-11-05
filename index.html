@@ -1,53 +1,232 @@
+<!-- language: html, file: index.html, target: modern web browsers, responsive layout -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মোকো স্টোর - Moco Store</title>
+    <title id="site-title">PIN TOPUP BD</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="app-container">
+        <!-- Logo Animation Screen -->
+        <div id="splash-screen" class="screen active">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo" id="animated-logo" class="admin-editable-img" data-key="site_logo">
+                <div class="tagline admin-editable-text" data-key="site_tagline">নিরাপদ এবং দ্রুত টপআপ</div>
+            </div>
+        </div>
 
-    <div class="event-header">
-        <h2>মোকো স্টোর (BD)</h2>
-        <p>ফ্রি ফায়ার ডায়মন্ড টপ আপ</p>
+        <!-- Main Dashboard Screen -->
+        <div id="main-screen" class="screen">
+            <header class="top-bar">
+                <div class="logo-wrapper admin-editable-container" data-admin-editable="true">
+                    <span class="logo-icon admin-editable-text" data-key="logo_short">PT</span>
+                    <span class="logo-text admin-editable-text" data-key="site_name">PIN TOPUP BD</span>
+                </div>
+                <div class="user-balance-pill">
+                    <span class="currency">৳</span>
+                    <span id="balance-amount">0</span>
+                </div>
+            </header>
+
+            <div class="content-area" id="dynamic-content-area">
+                <!-- Notice Banner -->
+                <section class="notice-section admin-editable-container" data-admin-editable="true">
+                    <div class="notice-badge">NOTICE</div>
+                    <div class="notice-text-container">
+                        <p class="notice-text admin-editable-text" data-key="main_notice">PIN TOPUP BD এ ২৪ ঘণ্টাই টপআপ চালু থাকে।</p>
+                    </div>
+                </section>
+
+                <!-- Hero Banner Carousel -->
+                <section class="hero-section admin-editable-container" data-admin-editable="true">
+                    <div class="banner-slide">
+                        <img src="banner1.jpg" alt="Promo Banner" class="admin-editable-img" data-key="hero_banner">
+                    </div>
+                </section>
+
+                <!-- Quick Support Links -->
+                <div class="support-grid">
+                    <button class="support-btn whatsapp admin-editable-container" data-admin-editable="true"><span class="icon">💬</span><span class="admin-editable-text" data-key="whatsapp_btn_text">SUPPORT WhatsApp</span></button>
+                    <button class="support-btn telegram admin-editable-container" data-admin-editable="true"><span class="icon">✈️</span><span class="admin-editable-text" data-key="telegram_btn_text">SUPPORT Telegram</span></button>
+                </div>
+
+                <!-- Flash Sale Section -->
+                <section class="flash-sale-section admin-editable-container" data-admin-editable="true">
+                    <div class="section-title-row">
+                        <span class="section-emoji">⚡</span>
+                        <h2 class="admin-editable-text" data-key="flash_sale_title">Flash Sale</h2>
+                    </div>
+                    <div class="timer-badge">
+                        <span>Ending In</span>
+                        <div class="countdown" id="flash-timer">9273 : 30 : 35</div>
+                    </div>
+                    
+                    <div class="product-grid" id="flash-sale-grid">
+                        <!-- Dynamically populated from admin settings -->
+                    </div>
+                </section>
+
+                <!-- Main Product Grid (FF Top Up) -->
+                <section class="main-product-section admin-editable-container" data-admin-editable="true">
+                    <div class="section-title-row red-border">
+                        <h2 class="admin-editable-text" data-key="product_section_title">FF TOP UP [BD] ফ্রি ফায়ার টপআপ</h2>
+                    </div>
+                    <div class="product-grid multi-row" id="main-product-grid">
+                        <!-- Dynamically populated from admin settings -->
+                    </div>
+                </section>
+                
+                <!-- Rules & Conditions -->
+                <section class="rules-section">
+                    <h3>Rules & Conditions</h3>
+                    <ul class="rules-list">
+                        <li>শুধুমাত্র বাংলাদেশ আইডি কার্ড দিয়ে টপ আপ হবে।</li>
+                        <li>Player ID কোড ভুল দিলে ডায়মন্ড না পেলে PIN TOPUP BD কর্তৃপক্ষ দায়ী নয়।</li>
+                        <li>অর্ডার কমপ্লিট হওয়ার পরেও আইডিয়তে ডায়মন্ড না গেলে সাপোর্টে মেসেজ দিন।</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-btn active" onclick="switchTab('home')">
+                    <span class="nav-icon">🏠</span>
+                    <span>Home</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('orders')">
+                    <span class="nav-icon">📦</span>
+                    <span>My Orders</span>
+                </button>
+                <button class="nav-btn float-add" onclick="switchTab('add-money')">
+                    <span>+</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('codes')">
+                    <span class="nav-icon">🏷️</span>
+                    <span>My Codes</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('account')">
+                    <span class="nav-icon">👤</span>
+                    <span>My Account</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Checkout Modal -->
+        <div id="checkout-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-logo-badge">PT</div>
+                    <h3 id="modal-item-title">Item Title</h3>
+                    <button class="modal-close-btn" onclick="closeModal('checkout-modal')">✕</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="checkout-step-card">
+                        <div class="step-number-badge">2</div>
+                        <h4>Account Info</h4>
+                        <div class="game-tag">FREE FIRE</div>
+                        <div class="input-group">
+                            <label for="player-id-input">Free Fire Player ID *</label>
+                            <div class="input-with-action">
+                                <input type="text" id="player-id-input" placeholder="Enter Player ID">
+                                <button class="action-btn-gradient" onclick="verifyPlayerId()">
+                                    <span class="magnifying-glass">🔍</span> Verify
+                                </button>
+                            </div>
+                        </div>
+                        <div id="verification-status" class="verification-box hidden"></div>
+                    </div>
+
+                    <div class="checkout-step-card">
+                        <div class="step-number-badge">3</div>
+                        <h4>Payment Methods</h4>
+                        <p class="wallet-balance-text">আপনার অ্যাকাউন্ট ব্যালেন্স ৳0</p>
+                        <p class="required-balance-text">প্রোডাক্ট কিনতে আপনার প্রয়োজন <span id="required-amount">৳0</span></p>
+                        
+                        <div class="payment-method-selector selected">
+                            <div class="payment-radio-dot selected"></div>
+                            <div class="payment-brand-logos">
+                                <img src="bkash_logo.png" alt="bKash" id="checkout-bkash-logo">
+                            </div>
+                            <span class="payment-name">bKash Personal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="payable-info">
+                        <span class="payable-label">Payable Amount</span>
+                        <span class="payable-value" id="modal-payable-amount">৳0</span>
+                    </div>
+                    <button class="pay-now-action-btn" onclick="proceedToPayment()">PAY NOW</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Instruction Modal -->
+        <div id="payment-modal" class="modal-overlay">
+            <div class="modal-content payment-instruction-content">
+                <div class="modal-header pink-header">
+                    <div class="modal-logo-badge">PIN</div>
+                    <h3>Secure Checkout</h3>
+                    <button class="modal-close-btn" onclick="closeModal('payment-modal')">✕</button>
+                </div>
+                
+                <div class="modal-body p-instructions">
+                    <div class="invoice-box">
+                        <span>PIN TOPUP BD</span>
+                        <p>ইনভয়েস আইডিঃ <span id="invoice-id">JmdOiP90gTPJsDEaz79S</span></p>
+                    </div>
+
+                    <div class="amount-display-banner">
+                        ৳<span id="payment-amount-display">0</span>
+                    </div>
+
+                    <div class="instruction-steps-box">
+                        <div class="step-row highlight-bg">
+                            <span class="step-bullet"></span>
+                            <p><strong>*247#</strong> ডায়াল করে আপনার bKash মোবাইল মেনুতে যান অথবা bKash অ্যাপে যান।</p>
+                        </div>
+                        <div class="step-row">
+                            <span class="step-bullet"></span>
+                            <p><strong>"Send Money"</strong>-এ ক্লিক করুন।</p>
+                        </div>
+                        <div class="step-row copy-row">
+                            <span class="step-bullet"></span>
+                            <div>
+                                <p>প্রাপক নম্বর হিসেবে এই নম্বরটি লিখুনঃ</p>
+                                <div class="number-copy-container">
+                                    <span id="merchant-number">01799925886</span>
+                                    <button class="copy-action-btn" onclick="copyMerchantNumber()">📋 Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-row">
+                            <span class="step-bullet"></span>
+                            <p>টাকার পরিমাণঃ <strong id="amount-text-bold">0</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="txid-input-section">
+                        <label>ট্রানজেকশন আইডি দিন</label>
+                        <input type="text" id="txid-input" placeholder="TrxID">
+                    </div>
+                </div>
+
+                <div class="modal-footer column-layout">
+                    <button class="verify-payment-btn" onclick="submitPayment()">VERIFY</button>
+                    <button class="cancel-payment-btn" onclick="cancelPayment()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Support Widget -->
+        <div class="floating-support-btn" onclick="openSupportChat()">
+            🎧
+        </div>
     </div>
-
-    <div class="section-title">১. সিলেক্ট রিচার্জ</div>
-    <div class="items-grid" id="itemsContainer">
-        <div class="item-card" onclick="selectItem(this, '25 Diamonds', '20 TK')">
-            <h4>25 Diamond</h4>
-            <p>20 TK</p>
-        </div>
-        <div class="item-card" onclick="selectItem(this, '115 Diamonds', '77 TK')">
-            <h4>115 Diamond</h4>
-            <p>77 TK</p>
-        </div>
-        <div class="item-card" onclick="selectItem(this, '240 Diamonds', '158 TK')">
-            <h4>240 Diamond</h4>
-            <p>158 TK</p>
-        </div>
-    </div>
-
-    <div class="section-title">২. Account Info</div>
-    <div class="input-group">
-        <label>Free Fire Player ID *</label>
-        <input type="text" class="input-field" placeholder="Enter Player ID">
-    </div>
-
-    <div class="section-title">৩. Payment Methods</div>
-    <div class="payment-methods">
-        <div class="payment-option selected" onclick="selectPayment(this)">
-            <h4>Wallet Pay</h4>
-            <p>Balance: 0 TK</p>
-        </div>
-        <div class="payment-option" onclick="selectPayment(this)">
-            <h4>Instant Pay</h4>
-            <p>bKash</p>
-        </div>
-    </div>
-
-    <button class="action-btn">BUY NOW</button>
 
     <script src="script.js"></script>
 </body>
